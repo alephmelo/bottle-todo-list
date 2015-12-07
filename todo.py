@@ -1,8 +1,7 @@
 import sqlite3
 from bottle import route, run, debug, template, request, static_file, error
-
-# only needed when you run Bottle on mod_wsgi
 from bottle import default_app
+
 
 @route('/todo')
 def todo_list():
@@ -15,6 +14,7 @@ def todo_list():
 
     output = template('make_table', rows=result)
     return output
+
 
 @route('/new', method='GET')
 def new_item():
@@ -35,6 +35,7 @@ def new_item():
 
     else:
         return template('new_task.tpl')
+
 
 @route('/edit/<no:int>', method='GET')
 def edit_item(no):
@@ -63,6 +64,7 @@ def edit_item(no):
 
         return template('edit_task', old = cur_data, no = no)
 
+
 @route('/item<item:re:[0-9]+>')
 def show_item(item):
 
@@ -77,10 +79,12 @@ def show_item(item):
         else:
             return 'Task: %s' %result[0]
 
+
 @route('/help')
 def help():
 
     static_file('help.html', root='.')
+
 
 @route('/json<json:re:[0-9]+>')
 def show_json(json):
@@ -100,6 +104,7 @@ def show_json(json):
 @error(403)
 def mistake403(code):
     return 'There is a mistake in your url!'
+
 
 @error(404)
 def mistake404(code):
