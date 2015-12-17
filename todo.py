@@ -1,6 +1,5 @@
 import sqlite3
-from bottle import route, run, debug, template, request, static_file, error
-from bottle import default_app
+from bottle import route, run, debug, template, request, static_file, error, default_app
 
 
 @route('/todo')
